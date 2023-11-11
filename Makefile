@@ -19,7 +19,8 @@ RL			=	-lreadline
 
 # source files
 SRC			= 	main.c \
-				utils.c
+				utils.c \
+				banner.c
 SRCDIR		=	src/
 
 # object files

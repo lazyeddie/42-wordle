@@ -6,6 +6,11 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+# include "defines.h"
+
+// main.c
+void	print_banner(void);
+
 // utils.c
 int		ft_strlen(char *str);
 int		ft_isalpha(char *str);

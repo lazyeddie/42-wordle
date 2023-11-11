@@ -1,0 +1,6 @@
+dep
+obj
+*.d
+*.o
+*test*
+wordle
