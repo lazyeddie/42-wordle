@@ -7,15 +7,24 @@
 # include <readline/history.h>
 # include <fcntl.h>
 # include <string.h>
+# include <time.h>
+# include <stdint.h>
 
 # include "defines.h"
 
 typedef struct s_game
 {
-	char	*database_string;
-	char	**database_array;
+	char	**dictionary;
+	size_t	dictionary_size;
+	size_t	word_count;
 }			t_game;
 
+/* typedef struct s_guess
+{
+	char	*str;
+	char	*color[5];
+	int		occurrences[5]; // not sure...
+}			t_guess; */
 // banner.c
 void	print_banner(void);
 
@@ -25,12 +34,12 @@ void	init_struct(t_game *game);
 // free_all.c
 int		free_all(t_game *game, char *err_msg);
 
-// read_database.c
-char	**read_database(t_game *game, FILE *db_file);
+// read_dictionary.c
+int	read_dictionary(t_game *game, FILE *db_file);
 
 // word.c
-char	*get_wod(char **db);
-int		find_word_in_dict(char *input);
+char	*get_wod(t_game *game);
+int		find_word_in_dict(t_game *game, char *input);
 
 // print_game.c
 int		print_game(t_game *game);
