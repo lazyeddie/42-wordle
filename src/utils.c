@@ -24,6 +24,26 @@ int	ft_isalpha(char *str)
 	return (1);
 }
 
+char	*to_lower(char *str)
+{
+	int		i;
+	int		len;
+	char	*new;
+
+	len = ft_strlen(str);
+	new = malloc(sizeof(char) * len + 1);
+	if (!new)
+		exit (1);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			new[i] = str[i] + 32;
+		i++;
+	}
+	return (new);
+}
+
 char	*to_upper(char *str)
 {
 	int		i;

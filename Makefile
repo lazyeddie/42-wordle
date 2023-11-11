@@ -5,7 +5,6 @@ NAME		= wordle
 CC			= cc
 CFLAGS		= -Werror -Wextra -Wall -g
 DEPFLAGS	= -MP -MMD
-MLXFLAGS	= -L./minilibx-linux -lmlx -lX11 -lXext
 
 # # libft
 # LIB_DIR		=	lib/ft_printf/
@@ -53,7 +52,7 @@ BG_CYAN		='\033[46m'
 BG_WHITE	='\033[47m'
 
 BOLD		='\033[1m'
-XXX			='\033[2m'
+DIM			='\033[2m'
 CURSIVE		='\033[3m'
 UNDERLINE	='\033[4m'
 RESET		='\033[0m'
@@ -67,7 +66,7 @@ all: $(NAME)
 
 $(NAME): $(OBJDIR) $(OBJPATH) $(DEPDIR)
 	@$(CC) $(CFLAGS) $(INC) -o $(NAME) $(OBJPATH) $(RL)
-	@echo $(BG_GREEN) $(XXX)"wordle ready" $(RESET)
+	@echo $(BG_GREEN) $(DIM)"wordle ready" $(RESET)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
 	$(CC) $(CFLAGS) $(DEPFLAGS) $(INC) -c -o $@ $<
@@ -89,7 +88,7 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 	@echo $(GRAY) $(CURSIVE) "====> All object files, libraries  and executables removed successfully!" $(RESET)
-	@echo $(BG_YELLOW) $(XXX)"All clean" $(RESET)
+	@echo $(BG_YELLOW) $(DIM)"All clean" $(RESET)
 
 re: fclean all
 
