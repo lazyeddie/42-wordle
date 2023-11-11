@@ -1,6 +1,6 @@
 #include "wordle.h"
 
-// print banner
+/// print banner
 // get word of the day from word list
 // print six empty rows (5 underscores) and prompt
 // get input from user
@@ -20,9 +20,19 @@
 int	main(void)
 {
 	char	*word = "brave";
+	int		fd;
+	char **database;
+	t_game	game;
 
+	init_struct(&game);
 	print_banner();
+	fd = open("words.txt", O_RDONLY);
+	if (fd < 0)
+		return (free_all(&game,ERR_FD));
+	database = read_database(fd);
+	word = get_wod(database);
 	if (print_game())
 		print_fail(to_upper(word));
+	// free_all(&game, NULL);...
 	return (0);
 }
