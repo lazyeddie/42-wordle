@@ -8,8 +8,15 @@
 
 # include "defines.h"
 
-// main.c
+// banner.c
 void	print_banner(void);
+
+// print_game.c
+int		print_game(void);
+void	print_underscores(int guess);
+void	print_prev_guesses(char **prev_guesses, char *curr_guess);
+void	print_guess(char *str);
+void	print_fail(char *word);
 
 // utils.c
 int		ft_strlen(char *str);
