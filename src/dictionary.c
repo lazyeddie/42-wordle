@@ -11,14 +11,14 @@ int read_dictionary(t_game *game, FILE *db_file)
 	db_string = (char*)malloc(sizeof(char) * (game->dictionary_size + 1));
 	if (!db_string)
 	{
-		free_all(game, ERR_MALLOC);
+		free_all(game, ERR_MALLOC, 0);
 		return (1);
 	}
 	nbytes = fread(db_string, 1, game->dictionary_size, db_file);
 	game->dictionary = ft_split(db_string, '\n');
 	if (!game->dictionary)
 	{
-		free_all(game, ERR_MALLOC);
+		free_all(game, ERR_MALLOC, 0);
 		return (1);
 	}
 	free(db_string);

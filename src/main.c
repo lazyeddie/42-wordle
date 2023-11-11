@@ -19,7 +19,7 @@
 // if n=6 --> FAIL
 int	main(void)
 {
-	char	*word = "brave";
+	// char	*word = "brave";
 	FILE	*db_file;
 	t_game	game;
 
@@ -29,10 +29,10 @@ int	main(void)
 	if (!db_file)
 		return (free_all(&game,ERR_FD, MAX));
 	read_dictionary(&game, db_file);
-	word = get_wod(&game);
-	printf("target_word: %s\n", word);
+	get_wod(&game);
+	printf("target_word: %s\n", game.wod);
 	if (print_game(&game))
-		print_fail(word);
+		print_fail(game.wod);
 	free_all(&game, NULL, MAX);
 	return (0);
 }

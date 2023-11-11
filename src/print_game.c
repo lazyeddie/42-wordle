@@ -9,7 +9,7 @@ int	print_game(t_game *game)
 	{
 		input = "";
 		print_underscores(guess);
-		while (ft_strlen(input) != 5 || !ft_isalpha(input) || !find_word_in_dict(game, input))
+		while (ft_strlen(input) != 5 || !ft_isalpha(input)) //|| !find_word_in_dict(game, input))
 		{
 			input = readline("Enter 5 letter word:\t");
 			if (!ft_strlen(input))
@@ -17,7 +17,7 @@ int	print_game(t_game *game)
 		}
 		guess--;
 		print_prev_guesses(game, game->prev_guesses, input);
-		print_guess(input);
+		print_guess(game, input);
 		free(input);
 		if (!guess)
 			return (1);
@@ -38,7 +38,7 @@ void	print_prev_guesses(t_game *game, char **prev_guesses, char *curr_guess)
 	i = 0;
 	while (prev_guesses && prev_guesses[i])
 	{
-		print_guess(prev_guesses[i]);
+		print_guess(game, prev_guesses[i]);
 		i++;
 	}
 	prev_guesses[i] = strdup(curr_guess);
@@ -46,10 +46,9 @@ void	print_prev_guesses(t_game *game, char **prev_guesses, char *curr_guess)
 		free_all(game, ERR_MALLOC, i);
 }
 
-void	print_guess(char *str)
+void	print_guess(t_game *game, char *str)
 {
 	int		i;
-	char	*wod = "apart";
 	char	*bg_color;
 
 	i = 0;
@@ -57,14 +56,17 @@ void	print_guess(char *str)
 	while (str && str[i])
 	{
 		bg_color = RESET;
-		if (find_hit(wod, str[i], i))
+		if (find_hit(game->wod, str[i], i))
 			bg_color = BG_GREEN;
-		else if (find_char(wod, str[i], i) > 0)
+		else if (find_char(game->wod, str[i], i) > 0)
 			bg_color = BG_YELLOW;
 		printf(WHITE BOLD "%s %c "RESET, bg_color, toupper(str[i]));
 		i++;
 	}
 	printf("\n");
+	// rl_on_new_line();
+	// rl_replace_line("hallihallo", 8);
+	// rl_redisplay();
 }
 
 void	print_fail(char *word)

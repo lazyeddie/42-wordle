@@ -17,7 +17,8 @@ typedef struct s_game
 	char	**dictionary;
 	size_t	dictionary_size;
 	size_t	word_count;
-  char	*prev_guesses[6];
+  	char	*prev_guesses[6];
+	char	*wod;
 }			t_game;
 
 /* typedef struct s_guess
@@ -42,14 +43,14 @@ int		ft_error(char *msg);
 int	read_dictionary(t_game *game, FILE *db_file);
 
 // word.c
-char	*get_wod(t_game *game);
+void	get_wod(t_game *game);
 int		find_word_in_dict(t_game *game, char *input);
 
 // print_game.c
 int		print_game(t_game *game);
 void	print_underscores(int guess);
 void	print_prev_guesses(t_game *game, char *prev_guesses[], char *curr_guess);
-void	print_guess(char *str);
+void	print_guess(t_game *game, char *str);
 void	print_fail(char *word);
 
 // utils.c

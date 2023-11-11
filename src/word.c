@@ -1,12 +1,13 @@
 #include "wordle.h"
 
-char	*get_wod(t_game *game)
+void	get_wod(t_game *game)
 {
 	int	index;
 
 	srand(time(NULL));
 	index = rand() % game->word_count;
-	return (game->dictionary[index]);
+	game->wod = game->dictionary[index];
+	// return (game->dictionary[index]);
 }
 
 int	find_word_in_dict(t_game *game, char *input)
