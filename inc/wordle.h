@@ -32,9 +32,9 @@ char	*get_wod(char **db);
 int		find_word_in_dict(char *input);
 
 // print_game.c
-int		print_game(void);
+int		print_game(t_game *game);
 void	print_underscores(int guess);
-void	print_prev_guesses(char **prev_guesses, char *curr_guess);
+void	print_prev_guesses(char *prev_guesses[], char *curr_guess);
 void	print_guess(char *str);
 void	print_fail(char *word);
 

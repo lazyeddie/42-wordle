@@ -1,17 +1,25 @@
 #include "wordle.h"
 
-int	print_game(void)
+int	print_game(t_game *game)
 {
 	char	*input;
 	int		guess = 6;
-	char 	*prev_guesses[5];
+	char 	*prev_guesses[6] = {NULL};
+	// int		i;
 
-	bzero(prev_guesses, sizeof(char *));
+	(void)game;
+	// bzero(prev_guesses, sizeof(char **));
+	// i = 0;
+	// while (prev_guesses[i])
+	// {
+	// 	prev_guesses[i] = NULL;
+	// 	i++;
+	// }
 	while (1)
 	{
 		input = "";
 		print_underscores(guess);
-		while (ft_strlen(input) != 5 || !ft_isalpha(input) || !find_word_in_dict(input))
+		while (ft_strlen(input) != 5 || !ft_isalpha(input)) // || !find_word_in_dict(input))
 		{
 			input = readline("Enter 5 letter word:\t");
 			if (!ft_strlen(input))
@@ -21,9 +29,8 @@ int	print_game(void)
 			}
 		}
 		guess--;
-		// print_prev_guesses(prev_guesses, input);
-		print_guess(to_upper(input));
-		// printf("\t\t\t\t%s\n", word);
+		print_prev_guesses(prev_guesses, input);
+		print_guess(input);
 		free(input);
 		if (!guess)
 			return (1);
@@ -40,16 +47,14 @@ void	print_underscores(int guess)
 void	print_prev_guesses(char **prev_guesses, char *curr_guess)
 {
 	int			i;
-	static int	j;
 
 	i = 0;
-	while (prev_guesses[i])
+	while (prev_guesses && prev_guesses[i])
 	{
 		print_guess(prev_guesses[i]);
 		i++;
 	}
-	prev_guesses[j] = strdup(to_upper(curr_guess));
-	j++;
+	prev_guesses[i] = strdup(curr_guess);
 }
 
 void	print_guess(char *str)
@@ -58,8 +63,11 @@ void	print_guess(char *str)
 
 	i = 0;
 	printf("\t\t\t\t\t\t   ");
-	while (str[i])
-		printf(WHITE BOLD"%c "RESET, str[i++]);
+	while (str && str[i])
+	{
+		printf(WHITE BOLD"%c "RESET, toupper(str[i]));
+		i++;
+	}
 	printf("\n");
 }
 

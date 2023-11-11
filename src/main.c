@@ -21,7 +21,7 @@ int	main(void)
 {
 	char	*word = "brave";
 	int		fd;
-	char **database;
+	char 	**database;
 	t_game	game;
 
 	init_struct(&game);
@@ -30,9 +30,9 @@ int	main(void)
 	if (fd < 0)
 		return (free_all(&game,ERR_FD));
 	database = read_database(fd);
-	word = get_wod(database);
-	if (print_game())
-		print_fail(to_upper(word));
+	// word = get_wod(database);
+	if (print_game(&game))
+		print_fail(word);
 	// free_all(&game, NULL);...
 	return (0);
 }

@@ -5,7 +5,7 @@ int	ft_strlen(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 		i++;
 	return (i);
 }
@@ -15,7 +15,7 @@ int	ft_isalpha(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		if (str[i] < 'A' || str[i] > 'z' || (str[i] > 'Z' && str[i] < 'a'))
 			return (0);
@@ -35,7 +35,7 @@ char	*to_lower(char *str)
 	if (!new)
 		exit (1);
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		if (str[i] >= 'A' && str[i] <= 'Z')
 			new[i] = str[i] + 32;
@@ -55,7 +55,7 @@ char	*to_upper(char *str)
 	if (!new)
 		exit (1);
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		if (str[i] >= 'a' && str[i] <= 'z')
 			new[i] = str[i] - 32;
