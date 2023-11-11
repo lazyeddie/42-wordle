@@ -5,11 +5,31 @@
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <fcntl.h>
 
 # include "defines.h"
 
+typedef struct s_game
+{
+	char	*database_string;
+	char	**database_array;
+}			t_game;
+
 // banner.c
 void	print_banner(void);
+
+// init_struct.c
+void	init_struct(t_game *game);
+
+// free_all.c
+int		free_all(t_game *game, char *err_msg);
+
+// read_database.c
+char	**read_database(int fd);
+
+// word.c
+char	*get_wod(char **db);
+int		find_word_in_dict(char *input);
 
 // print_game.c
 int		print_game(void);

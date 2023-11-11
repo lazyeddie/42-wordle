@@ -19,6 +19,10 @@ RL			=	-lreadline
 
 # source files
 SRC			= 	main.c \
+				init_struct.c \
+				free_all.c \
+				database.c \
+				word.c \
 				banner.c \
 				print_game.c \
 				utils.c
@@ -73,7 +77,7 @@ $(NAME): $(OBJDIR) $(OBJPATH) $(DEPDIR)
 $(OBJDIR)%.o: $(SRCDIR)%.c
 	$(CC) $(CFLAGS) $(DEPFLAGS) $(INC) -c -o $@ $<
 
-$(OBJDIR): 
+$(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
 $(DEPDIR):

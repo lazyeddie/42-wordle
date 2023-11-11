@@ -11,7 +11,7 @@ int	print_game(void)
 	{
 		input = "";
 		print_underscores(guess);
-		while (ft_strlen(input) != 5 || !ft_isalpha(input))
+		while (ft_strlen(input) != 5 || !ft_isalpha(input) || !find_word_in_dict(input))
 		{
 			input = readline("Enter 5 letter word:\t");
 			if (!ft_strlen(input))

@@ -25,4 +25,7 @@
 # define UNDERLINE	"\033[4m"
 # define RESET		"\033[0m"
 
+# define ERR_MALLOC "Malloc Error"
+# define ERR_FD		"Invalid fd"
+
 #endif
