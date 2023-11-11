@@ -3,7 +3,6 @@
 
 void	init_struct(t_game *game)
 {
-	(void)game;
-	//game.database_string = database;
-	//game.database_array = database;
+	game->database_array = NULL;
+	game->database_string = NULL;
 }

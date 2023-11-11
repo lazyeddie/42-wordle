@@ -25,7 +25,9 @@ SRC			= 	main.c \
 				word.c \
 				banner.c \
 				print_game.c \
-				utils.c
+				utils.c \
+				ft_split.c
+
 SRCDIR		=	src/
 
 # object files
