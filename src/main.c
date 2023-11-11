@@ -20,17 +20,16 @@
 int	main(void)
 {
 	char	*word = "brave";
-	int		fd;
-	char **database;
+	FILE	*db_file;
 	t_game	game;
 
 	init_struct(&game);
 	print_banner();
-	fd = open("words.txt", O_RDONLY);
-	if (fd < 0)
+	db_file = fopen("words.txt", "r");
+	if (!db_file)
 		return (free_all(&game,ERR_FD));
-	database = read_database(fd);
-	word = get_wod(database);
+	read_database(&game, db_file);
+	word = get_wod(game.database_array);
 	if (print_game())
 		print_fail(to_upper(word));
 	// free_all(&game, NULL);...

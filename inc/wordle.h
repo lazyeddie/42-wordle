@@ -6,6 +6,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
+# include <string.h>
 
 # include "defines.h"
 
@@ -25,7 +26,7 @@ void	init_struct(t_game *game);
 int		free_all(t_game *game, char *err_msg);
 
 // read_database.c
-char	**read_database(int fd);
+char	**read_database(t_game *game, FILE *db_file);
 
 // word.c
 char	*get_wod(char **db);
@@ -43,5 +44,10 @@ int		ft_strlen(char *str);
 int		ft_isalpha(char *str);
 char	*to_lower(char *str);
 char	*to_upper(char *str);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+
+// ft_split.c
+char	**ft_split(char const *s, char c);
+
 
 #endif
