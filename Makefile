@@ -21,7 +21,7 @@ RL			=	-lreadline
 SRC			= 	main.c \
 				init_struct.c \
 				free_all.c \
-				database.c \
+				dictionary.c \
 				word.c \
 				banner.c \
 				print_game.c \

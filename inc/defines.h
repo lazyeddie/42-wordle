@@ -28,4 +28,6 @@
 # define ERR_MALLOC "Malloc Error"
 # define ERR_FD		"Invalid fd"
 
+# define MAX 6
+
 #endif
