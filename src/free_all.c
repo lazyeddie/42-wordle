@@ -2,9 +2,7 @@
 
 int	free_all(t_game *game, char *err_msg, int i)
 {
-	if (game->dictionary_string)
-		game->dictionary_string = free_ptr(game->dictionary_string);
-	if (game->dictionary_array)
+	if (game->dictionary)
 		game->dictionary_array = free_arr(game->dictionary_array, MAX);
 	if (game->prev_guesses[0])
 		free_arr(game->prev_guesses, i);

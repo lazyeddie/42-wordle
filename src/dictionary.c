@@ -1,30 +1,31 @@
 #include "wordle.h"
 
-char **read_dictionary(t_game *game, FILE *db_file)
+int read_dictionary(t_game *game, FILE *db_file)
 {
-	long	db_size;
 	size_t	nbytes;
+	char	*db_string;
 
 	fseek(db_file, 0, SEEK_END);
-	db_size = ftell(db_file);
+	game->dictionary_size = ftell(db_file);
 	fseek(db_file, 0, SEEK_SET);
-	game->dictionary_string = (char*)malloc(sizeof(char) * (db_size + 1));
-	if (!game->dictionary_string)
+	db_string = (char*)malloc(sizeof(char) * (game->dictionary_size + 1));
+	if (!db_string)
 	{
-		free_all(game, ERR_MALLOC, 0);
-		return (NULL);
+		free_all(game, ERR_MALLOC);
+		return (1);
 	}
-	nbytes = fread(game->dictionary_string, 1, db_size, db_file);
-	//game->dictionary_string[nbytes] = '\0';
-	//printf("db_string: %s\n", game->dictionary_string);
-	game->dictionary_array = ft_split(game->dictionary_string, '\n');
-	if (!game->dictionary_array)
+	nbytes = fread(db_string, 1, game->dictionary_size, db_file);
+	game->dictionary = ft_split(db_string, '\n');
+	if (!game->dictionary)
 	{
-		free_all(game, ERR_MALLOC, 0);
-		return (NULL);
+		free_all(game, ERR_MALLOC);
+		return (1);
 	}
-	//printf("db_array: %s\n", game->dictionary_array[0]);
-	printf("db_size: %ld\n", db_size);
-
-	return NULL;
+	free(db_string);
+	game->word_count = 0;
+	while(game->dictionary[game->word_count])
+		game->word_count++;
+	printf("Dictionary_size: %ld Bytes\n", game->dictionary_size);
+	printf("Words in Dictionary: %lu\n", game->word_count);
+	return (0);
 }

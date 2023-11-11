@@ -9,7 +9,7 @@ int	print_game(t_game *game)
 	{
 		input = "";
 		print_underscores(guess);
-		while (ft_strlen(input) != 5 || !ft_isalpha(input)) // || !find_word_in_dict(input))
+		while (ft_strlen(input) != 5 || !ft_isalpha(input) || !find_word_in_dict(game, input))
 		{
 			input = readline("Enter 5 letter word:\t");
 			if (!ft_strlen(input))
