@@ -29,9 +29,9 @@ int	main(void)
 	if (!db_file)
 		return (free_all(&game,ERR_FD));
 	read_database(&game, db_file);
-	word = get_wod(game.database_array);
-	if (print_game())
-		print_fail(to_upper(word));
+	// word = get_wod(game.database_array);
+	if (print_game(&game))
+		print_fail(word);
 	// free_all(&game, NULL);...
 	return (0);
 }
