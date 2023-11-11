@@ -24,7 +24,7 @@ int	ft_isalpha(char *str)
 	return (1);
 }
 
-char	*to_lower(char *str)
+char	*to_lower(t_game *game, char *str)
 {
 	int		i;
 	int		len;
@@ -33,7 +33,7 @@ char	*to_lower(char *str)
 	len = ft_strlen(str);
 	new = malloc(sizeof(char) * len + 1);
 	if (!new)
-		exit (1);
+		free_all(game, ERR_MALLOC, 0);
 	i = 0;
 	while (str && str[i])
 	{
@@ -44,7 +44,7 @@ char	*to_lower(char *str)
 	return (new);
 }
 
-char	*to_upper(char *str)
+char	*to_upper(t_game *game, char *str)
 {
 	int		i;
 	int		len;
@@ -53,7 +53,7 @@ char	*to_upper(char *str)
 	len = ft_strlen(str);
 	new = malloc(sizeof(char) * len + 1);
 	if (!new)
-		exit (1);
+		free_all(game, ERR_MALLOC, 0);
 	i = 0;
 	while (str && str[i])
 	{
@@ -77,4 +77,29 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	if (size)
 		*(dst + i) = '\0';
 	return (ft_strlen((char *)src));
+}
+
+int	find_hit(char *wod, char c, int i)
+{
+	if (wod[i] == c)
+		return (1);
+	return (0);
+}
+
+int	find_char(char *wod, char c, int i)
+{
+	int	count;
+
+	count = 0;
+	while (wod[i])
+	{
+		if (wod[i] == c)
+			count++;
+		i++;
+	}
+	// if (hit)
+	// 	return (-1);
+	// if (hit && count > 1)
+	return (count);
+	// return (0);
 }
