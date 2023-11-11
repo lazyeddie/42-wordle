@@ -1,6 +1,6 @@
 #include "wordle.h"
 
-// print banner
+/// print banner
 // get word of the day from word list
 // print six empty rows (5 underscores) and prompt
 // get input from user
