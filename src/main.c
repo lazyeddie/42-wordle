@@ -28,8 +28,9 @@ int	main(void)
 	db_file = fopen("words.txt", "r");
 	if (!db_file)
 		return (free_all(&game,ERR_FD));
-	read_database(&game, db_file);
-	// word = get_wod(game.database_array);
+	read_dictionary(&game, db_file);
+	word = get_wod(&game);
+	printf("target_word: %s\n", word);
 	if (print_game(&game))
 		print_fail(word);
 	// free_all(&game, NULL);...
