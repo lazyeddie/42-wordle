@@ -8,7 +8,6 @@ void	get_wod(t_game *game)
 	index = rand() % game->word_count;
 	game->wod.str = game->dictionary[index];
 	printf("WOD: %s\n", game->wod.str);
-	count_occurrences(&game->wod, game->wod.str);
 }
 
 int	find_word_in_dict(t_game *game, char *input)
@@ -28,7 +27,6 @@ int	find_word_in_dict(t_game *game, char *input)
 	{
 		index = min + ((max - min) / 2);
 		comparison = strncmp(input, game->dictionary[index], 5);
-		//printf("min: %lu, max: %lu, index: %lu, comparison: %d\n", min, max, index, comparison);
 		if (comparison == 0)
 			return (1);
 		else if (comparison < 0)

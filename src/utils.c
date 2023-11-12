@@ -79,23 +79,33 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (ft_strlen((char *)src));
 }
 
-void	print_info(t_letters *wod, t_letters *input)
+/* void	print_info(t_letters *wod, t_letters *input)
 {
 	int	i;
 
 	i = 0;
+	printf("wod: %s\n", wod->str);
 	printf("wod-occur: ");
-	while (i < 5)
-		printf("%d ", wod->occurrences[i++]);
+	//while (i < 5)
+	//	printf("%d ", wod->occurrences[i++]);
 	printf("\n");
 	i = 0;
 	printf("cur-occur: ");
 	while (i < 5)
-		printf("%d ", input->occurrences[i++]);
+	//	printf("%d ", input->occurrences[i++]);
 	printf("\n");
 	i = 0;
 	printf("color: ");
 	while (i < 5)
 		printf("%d ", input->color[i++]);
 	printf("\n");
+} */
+
+t_letters	copy_letters(t_letters *input)
+{
+	t_letters copy;
+
+	init_letters(&copy);
+	copy.str = strdup(input->str);
+	return (copy);
 }
