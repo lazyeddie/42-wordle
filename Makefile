@@ -25,6 +25,7 @@ SRC			= 	main.c \
 				word.c \
 				banner.c \
 				print_game.c \
+				colors.c \
 				utils.c \
 				ft_split.c
 

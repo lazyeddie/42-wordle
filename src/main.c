@@ -27,12 +27,14 @@ int	main(void)
 	print_banner();
 	db_file = fopen("words.txt", "r");
 	if (!db_file)
-		return (free_all(&game,ERR_FD, MAX));
+		return (free_all(&game, ERR_FD, MAX));
 	read_dictionary(&game, db_file);
 	get_wod(&game);
-	printf("target_word: %s\n", game.wod);
-	if (print_game(&game))
-		print_fail(game.wod);
+	printf("target_word: %s\n", game.wod.str);
+	if (print_game(&game, &game.input))
+		print_fail(game.wod.str);
+	else
+		print_success();
 	free_all(&game, NULL, MAX);
 	return (0);
 }

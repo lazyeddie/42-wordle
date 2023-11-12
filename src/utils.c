@@ -79,27 +79,33 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (ft_strlen((char *)src));
 }
 
-int	find_hit(char *wod, char c, int i)
+/* void	print_info(t_letters *wod, t_letters *input)
 {
-	if (wod[i] == c)
-		return (1);
-	return (0);
-}
+	int	i;
 
-int	find_char(char *wod, char c, int i)
+	i = 0;
+	printf("wod: %s\n", wod->str);
+	printf("wod-occur: ");
+	//while (i < 5)
+	//	printf("%d ", wod->occurrences[i++]);
+	printf("\n");
+	i = 0;
+	printf("cur-occur: ");
+	while (i < 5)
+	//	printf("%d ", input->occurrences[i++]);
+	printf("\n");
+	i = 0;
+	printf("color: ");
+	while (i < 5)
+		printf("%d ", input->color[i++]);
+	printf("\n");
+} */
+
+t_letters	copy_letters(t_letters *input)
 {
-	int	count;
+	t_letters copy;
 
-	count = 0;
-	while (wod[i])
-	{
-		if (wod[i] == c)
-			count++;
-		i++;
-	}
-	// if (hit)
-	// 	return (-1);
-	// if (hit && count > 1)
-	return (count);
-	// return (0);
+	init_letters(&copy);
+	copy.str = strdup(input->str);
+	return (copy);
 }
