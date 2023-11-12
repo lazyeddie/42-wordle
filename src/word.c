@@ -8,7 +8,7 @@ void	get_wod(t_game *game)
 	index = rand() % game->word_count;
 	game->wod.str = game->dictionary[index];
 	printf("WOD: %s\n", game->wod.str);
-	count_occurrences(&game->wod);
+	count_occurrences(&game->wod, game->wod.str);
 }
 
 int	find_word_in_dict(t_game *game, char *input)

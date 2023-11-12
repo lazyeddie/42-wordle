@@ -54,9 +54,15 @@ int		find_word_in_dict(t_game *game, char *input);
 int		print_game(t_game *game, t_letters *input);
 void	print_underscores(int guess);
 void	print_prev_guesses(t_game *game, char *prev_guesses[], char *curr_guess);
-void	print_guess(t_game *game, char *str);
+void	print_guess(t_game *game, t_letters *input, char *str);
 void	print_fail(char *word);
 void	print_success();
+
+// colors.c
+void	set_green(t_letters *wod, t_letters *input, char *str);
+void	set_yellow(t_letters *wod, t_letters *input, char *str);
+void	count_occurrences(t_letters *input, char *str);
+void	reset_colors(t_letters *input);
 
 // utils.c
 int		ft_strlen(char *str);
@@ -64,11 +70,6 @@ int		ft_isalpha(char *str);
 char	*to_lower(t_game *game, char *str);
 char	*to_upper(t_game *game, char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-int		find_hit(char *wod, char c, int i);
-int		find_char(char *wod, char c, int i);
-void	set_green(t_letters *wod, t_letters *input);
-void	set_yellow(t_letters *wod, t_letters *input);
-void	count_occurrences(t_letters *input);
 
 // ft_split.c
 char	**ft_split(char const *s, char c);

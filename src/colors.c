@@ -25,30 +25,46 @@ int	find_char(char *wod, char c, int i)
 	return (count);
 	// return (0);
 }
-void	set_green(t_letters *wod, t_letters *input)
+void	set_green(t_letters *wod, t_letters *input, char *str)
 {
 	int	i = 0;
 
 	while (wod->str[i])
 	{
-		if (wod->str[i] == input->str[i])
+		if (wod->str[i] == str[i])
 			input->color[i] = 'G';
 		i++;
 	}
 }
 
-void	set_yellow(t_letters *wod, t_letters *input)
+void	set_yellow(t_letters *wod, t_letters *input, char *str)
 {
-	// go through guess and when current color guess.color[i] != 'G'
-	// then set 'Y' or 'D' for default...
-	// use guess.occurrences and wod.occurrences to determine...
-	(void)input;
-	(void)wod;
+	int	i;
+	int	j;
+	char	c;
+
+	j = 0;
+	while (str[j])
+	{
+		c = str[j];
+		i = 0;
+		while (wod->str[i])
+		{
+			if (input->color[i] != 'G')
+			{
+				if (wod->str[i] == c && wod->occurrences[i] >= input->occurrences[i])
+					input->color[j] = 'Y';
+			}
+			i++;
+		}
+		j++;
+	}
+	
 }
 
 // count how many times current each letter str[i] is in the word and store the
 // count in guess.occorrences[i]
-void	count_occurrences(t_letters *input)
+void	count_occurrences(t_letters *input, char *str)
 {
 	int		i;
 	int		j;
@@ -58,16 +74,28 @@ void	count_occurrences(t_letters *input)
 	i = 0;
 	while (i < 5)
 	{
-		cur = input->str[i];
+		cur = str[i];
 		j = 0;
 		count = 0;
 		while (j < 5)
 		{
-			if (input->str[j] == cur)
+			if (str[j] == cur)
 				count++;
 			j++;
 		}
 		input->occurrences[i] = count;
+		i++;
+	}
+}
+
+void	reset_colors(t_letters *input)
+{
+	int	i;
+
+	i = 0;
+	while (i < 5)
+	{
+		input->color[i] = 0;
 		i++;
 	}
 }

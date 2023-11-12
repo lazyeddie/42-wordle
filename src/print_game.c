@@ -17,9 +17,8 @@ int	print_game(t_game *game, t_letters *input)
 		}
 		guess--;
 		print_prev_guesses(game, game->prev_guesses, input->str);
-		count_occurrences(input);
-		set_green(&game->wod, input);
-		print_guess(game, input->str);
+		count_occurrences(input, input->str);
+		print_guess(game, input, input->str);
 		if (!strncmp(input->str, game->wod.str, 5))
 			return (0);
 		free(input->str);
@@ -43,7 +42,8 @@ void	print_prev_guesses(t_game *game, char *prev_guesses[], char *curr_guess)
 	i = 0;
 	while (prev_guesses && prev_guesses[i])
 	{
-		print_guess(game, prev_guesses[i]);
+		count_occurrences(&game->input, prev_guesses[i]);
+		print_guess(game, &game->input, prev_guesses[i]);
 		i++;
 	}
 	prev_guesses[i] = strdup(curr_guess);
@@ -51,20 +51,22 @@ void	print_prev_guesses(t_game *game, char *prev_guesses[], char *curr_guess)
 		free_all(game, ERR_MALLOC, i);
 }
 
-void	print_guess(t_game *game, char *str)
+void	print_guess(t_game *game, t_letters *input, char *str)
 {
 	int		i;
 	char	*bg_color;
 
 	i = 0;
 	printf("\t\t\t\t\t\t");
+	reset_colors(&game->input);
+	set_green(&game->wod, input, str);
+	set_yellow(&game->wod, input, str);
 	while (str && str[i])
 	{
 		bg_color = RESET;
-		if (find_hit(game->wod.str, str[i], i))
-		//if (guess->color[i] == 1)
+		if (game->input.color[i] == 'G')
 			bg_color = BG_GREEN;
-		else if (find_char(game->wod.str, str[i], i) > 0)
+		else if (game->input.color[i] == 'Y')
 			bg_color = BG_YELLOW;
 		printf(WHITE BOLD "%s %c "RESET, bg_color, toupper(str[i]));
 		i++;
