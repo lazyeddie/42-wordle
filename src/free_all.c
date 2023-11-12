@@ -4,8 +4,8 @@ int	free_all(t_game *game, char *err_msg, int i)
 {
 	if (game->dictionary)
 		game->dictionary = free_arr(game->dictionary, MAX);
-	if (game->prev_guesses[0])
-		free_arr(game->prev_guesses, i);
+	if (game->prev_guesses[i].str)
+		//free_arr(game->prev_guesses, i);	// TODO free struct tguess...
 	if (err_msg)
 		ft_error(err_msg);
 	return (1);

@@ -12,21 +12,22 @@
 
 # include "defines.h"
 
+typedef struct s_guess
+{
+	char	*str;
+	char	color[5];
+	int		occurrences[5]; // not sure...
+}			t_guess;
+
 typedef struct s_game
 {
 	char	**dictionary;
 	size_t	dictionary_size;
 	size_t	word_count;
-  	char	*prev_guesses[6];
-	char	*wod;
+  	t_guess	prev_guesses[6];
+	t_guess	wod;
 }			t_game;
 
-/* typedef struct s_guess
-{
-	char	*str;
-	char	*color[5];
-	int		occurrences[5]; // not sure...
-}			t_guess; */
 // banner.c
 void	print_banner(void);
 
@@ -49,9 +50,10 @@ int		find_word_in_dict(t_game *game, char *input);
 // print_game.c
 int		print_game(t_game *game);
 void	print_underscores(int guess);
-void	print_prev_guesses(t_game *game, char *prev_guesses[], char *curr_guess);
-void	print_guess(t_game *game, char *str);
+void	print_prev_guesses(t_game *game, t_guess *prev_guesses, char *curr_guess);
+void	print_guess(t_game *game, t_guess *guess);
 void	print_fail(char *word);
+void	print_success();
 
 // utils.c
 int		ft_strlen(char *str);
@@ -61,6 +63,9 @@ char	*to_upper(t_game *game, char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 int		find_hit(char *wod, char c, int i);
 int		find_char(char *wod, char c, int i);
+void	set_green(t_guess *guess, t_guess *wod);
+void	set_yellow(t_guess *guess, t_guess *wod);
+void	count_occurrences(t_guess *guess);
 
 // ft_split.c
 char	**ft_split(char const *s, char c);
