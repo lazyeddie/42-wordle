@@ -61,7 +61,7 @@ void	print_success();
 // colors.c
 void	set_green(t_letters *wod, t_letters *input, char *str);
 void	set_yellow(t_letters *wod, t_letters *input, char *str);
-void	count_occurrences(t_letters *input, char *str);
+void	count_occurrences(t_letters *letters, char *str);
 void	reset_colors(t_letters *input);
 
 // utils.c
@@ -70,6 +70,7 @@ int		ft_isalpha(char *str);
 char	*to_lower(t_game *game, char *str);
 char	*to_upper(t_game *game, char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+void	print_info(t_letters *wod, t_letters *input);
 
 // ft_split.c
 char	**ft_split(char const *s, char c);

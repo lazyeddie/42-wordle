@@ -41,6 +41,7 @@ void	set_yellow(t_letters *wod, t_letters *input, char *str)
 {
 	int	i;
 	int	j;
+	int	k;
 	char	c;
 
 	j = 0;
@@ -54,17 +55,31 @@ void	set_yellow(t_letters *wod, t_letters *input, char *str)
 			{
 				if (wod->str[i] == c && wod->occurrences[i] >= input->occurrences[i])
 					input->color[j] = 'Y';
+				else if (wod->str[i] == c && wod->occurrences[i] < input->occurrences[i])
+				{
+					if (wod->occurrences[i] > 0)
+					{
+						k = 0;
+						while (wod->str[k])
+						{
+							if (wod->str[k] == c)
+								wod->occurrences[k] -= 1;
+						}
+						input->color[j] = 'Y';
+					}
+				}
 			}
 			i++;
 		}
 		j++;
+		// print_info(&wod, input);
 	}
 	
 }
 
 // count how many times current each letter str[i] is in the word and store the
 // count in guess.occorrences[i]
-void	count_occurrences(t_letters *input, char *str)
+void	count_occurrences(t_letters *letters, char *str)
 {
 	int		i;
 	int		j;
@@ -83,7 +98,7 @@ void	count_occurrences(t_letters *input, char *str)
 				count++;
 			j++;
 		}
-		input->occurrences[i] = count;
+		letters->occurrences[i] = count;
 		i++;
 	}
 }

@@ -17,7 +17,6 @@ int	print_game(t_game *game, t_letters *input)
 		}
 		guess--;
 		print_prev_guesses(game, game->prev_guesses, input->str);
-		count_occurrences(input, input->str);
 		print_guess(game, input, input->str);
 		if (!strncmp(input->str, game->wod.str, 5))
 			return (0);
@@ -25,6 +24,7 @@ int	print_game(t_game *game, t_letters *input)
 		if (!guess)
 			return (1);
 		i++;
+		print_info(&game->wod, input);
 	}
 	return (0);
 }
@@ -58,6 +58,8 @@ void	print_guess(t_game *game, t_letters *input, char *str)
 
 	i = 0;
 	printf("\t\t\t\t\t\t");
+	count_occurrences(&game->wod, game->wod.str);
+	count_occurrences(input, input->str);
 	reset_colors(&game->input);
 	set_green(&game->wod, input, str);
 	set_yellow(&game->wod, input, str);
@@ -71,21 +73,6 @@ void	print_guess(t_game *game, t_letters *input, char *str)
 		printf(WHITE BOLD "%s %c "RESET, bg_color, toupper(str[i]));
 		i++;
 	}
-	printf("\n");
-	i = 0;
-	printf("wod-occur: ");
-	while (i < 5)
-		printf("%d ", game->wod.occurrences[i++]);
-	printf("\n");
-	i = 0;
-	printf("cur-occur: ");
-	while (i < 5)
-		printf("%d ", game->input.occurrences[i++]);
-	printf("\n");
-	i = 0;
-	printf("color: ");
-	while (i < 5)
-		printf("%d ", game->input.color[i++]);
 	printf("\n");
 	// rl_on_new_line();
 	// rl_replace_line("hallihallo", 8);
