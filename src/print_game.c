@@ -9,13 +9,15 @@ int	print_game(t_game *game, t_letters *input)
 	{
 		input->str = "";
 		print_underscores(guess);
-		while (ft_strlen(input->str) != 5 || !ft_isalpha(input->str)) //|| !find_word_in_dict(game, input))
+		while (ft_strlen(input->str) != 5 || !ft_isalpha(input->str) || !find_word_in_dict(game, input->str))
 		{
 			input->str = readline("Enter 5 letter word:\t");
-			if (!ft_strlen(input->str))
-				free_all(game, NULL, MAX);
+			if (!input->str)
+				return (free_all(game, NULL, MAX));
 		}
 		guess--;
+		printf("%s", CLEAR_TERM);
+		print_banner();
 		print_prev_guesses(game, game->prev_guesses, input);
 		print_guess(game, input);
 		if (!strncmp(input->str, game->wod.str, 5))
@@ -31,7 +33,7 @@ int	print_game(t_game *game, t_letters *input)
 void	print_underscores(int guess)
 {
 	while (guess--)
-		printf(WHITE BOLD"\t\t\t\t\t\t _  _  _  _  _ \n\n"RESET);
+		printf(WHITE BOLD"\t\t\t\t\t\t _  _  _  _  _ \n"RESET);
 }
 
 void	print_prev_guesses(t_game *game, t_letters prev_guesses[], t_letters *input)
@@ -44,7 +46,7 @@ void	print_prev_guesses(t_game *game, t_letters prev_guesses[], t_letters *input
 		print_guess(game, &prev_guesses[i]);
 		i++;
 	}
-	prev_guesses[i] = copy_letters(input);
+	prev_guesses[i] = copy_letters(game, input);
 	if (!prev_guesses[i].str)
 		free_all(game, ERR_MALLOC, i);
 }
@@ -76,12 +78,12 @@ void	print_guess(t_game *game, t_letters *letters)
 	// rl_redisplay();
 }
 
-void	print_fail(char *word)
+void	print_fail(t_game *game, char *word)
 {
-	printf("----------\nYou lost! :(\nThe word of the day was %s\nBetter luck next time!\n", word);
+	printf("----------\nYou lost! :(\nThe word of the day was %s\nBetter luck next time!\n", to_upper(game, word));
 }
 
 void	print_success()
 {
-	printf("----------\nCongrats! :)\nYou guessed the word right!\nThank you for playing!\n");
+	printf("----------\nCongrats! :)\nYou guessed the word!\nThank you for playing!\n");
 }

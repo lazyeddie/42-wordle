@@ -101,11 +101,13 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	printf("\n");
 } */
 
-t_letters	copy_letters(t_letters *input)
+t_letters	copy_letters(t_game *game, t_letters *input)
 {
 	t_letters copy;
 
 	init_letters(&copy);
 	copy.str = strdup(input->str);
+	if (!copy.str)
+		free_all(game, ERR_MALLOC, MAX);
 	return (copy);
 }

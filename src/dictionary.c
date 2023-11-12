@@ -15,6 +15,7 @@ int read_dictionary(t_game *game, FILE *db_file)
 		return (1);
 	}
 	nbytes = fread(db_string, 1, game->dictionary_size, db_file);
+	db_string[nbytes] = '\0';
 	game->dictionary = ft_split(db_string, '\n');
 	if (!game->dictionary)
 	{
@@ -25,7 +26,7 @@ int read_dictionary(t_game *game, FILE *db_file)
 	game->word_count = 0;
 	while(game->dictionary[game->word_count])
 		game->word_count++;
-	printf("Dictionary_size: %ld Bytes\n", game->dictionary_size);
-	printf("Words in Dictionary: %lu\n", game->word_count);
+	// printf("Dictionary_size: %ld Bytes\n", game->dictionary_size);
+	// printf("Words in Dictionary: %lu\n", game->word_count);
 	return (0);
 }
