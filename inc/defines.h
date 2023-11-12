@@ -24,6 +24,7 @@
 # define CURSIVE	"\033[3m"
 # define UNDERLINE	"\033[4m"
 # define RESET		"\033[0m"
+# define CLEAR_TERM	"\033[2J\033[H"
 
 # define ERR_MALLOC "Malloc Error"
 # define ERR_FD		"Invalid fd"

@@ -8,7 +8,6 @@ void	init_letters(t_letters *letters)
 	letters->str = NULL;
 	while (i < 5)
 	{
-		//letters->occurrences[i] = 0;
 		letters->color[i] = 0;
 		i++;
 	}
