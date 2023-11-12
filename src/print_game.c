@@ -62,12 +62,28 @@ void	print_guess(t_game *game, t_guess *guess)
 	{
 		bg_color = RESET;
 		if (find_hit(game->wod.str, guess->str[i], i))
+		//if (guess->color[i] == 1)
 			bg_color = BG_GREEN;
 		else if (find_char(game->wod.str, guess->str[i], i) > 0)
 			bg_color = BG_YELLOW;
 		printf(WHITE BOLD "%s %c "RESET, bg_color, toupper(guess->str[i]));
 		i++;
 	}
+	printf("\n");
+	i = 0;
+	printf("wod-occur: ");
+	while (i < 5)
+		printf("%d ", game->wod.occurrences[i++]);
+	printf("\n");
+	i = 0;
+	printf("cur-occur: ");
+	while (i < 5)
+		printf("%d ", guess->occurrences[i++]);
+	printf("\n");
+	i = 0;
+	printf("color: ");
+	while (i < 5)
+		printf("%d ", guess->color[i++]);
 	printf("\n");
 	// rl_on_new_line();
 	// rl_replace_line("hallihallo", 8);

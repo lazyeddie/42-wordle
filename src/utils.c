@@ -120,10 +120,10 @@ void	set_yellow(t_guess *guess, t_guess *wod)
 	(void)wod;
 }
 
+// count how many times current each letter str[i] is in the word and store the
+// count in guess.occorrences[i]
 void	count_occurrences(t_guess *guess)
 {
-	// count how many times current each letter str[i] is in the word and store the
-	// count in guess.occorrences[i]
 	int	i;
 	int	j;
 	char	cur;

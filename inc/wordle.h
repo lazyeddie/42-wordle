@@ -17,6 +17,7 @@ typedef struct s_guess
 	char	*str;
 	char	color[5];
 	int		occurrences[5]; // not sure...
+	int 	already_printed[5];
 }			t_guess;
 
 typedef struct s_game
