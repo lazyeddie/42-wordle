@@ -1,15 +1,15 @@
 #include "wordle.h"
 
-void	init_guess(t_guess *guess)
+void	init_letters(t_letters *letters)
 {
 	int	i;
 
 	i = 0;
-	guess->str = NULL;
+	letters->str = NULL;
 	while (i < 5)
 	{
-		guess->occurrences[i] = 0;
-		guess->color[i] = 0;
+		letters->occurrences[i] = 0;
+		letters->color[i] = 0;
 		i++;
 	}
 }
@@ -23,6 +23,7 @@ void	init_struct(t_game *game)
 	game->word_count = 0;
   	i = MAX;
 	while (i >= 0)
-		init_guess(&game->prev_guesses[i--]);
-
+		game->prev_guesses[i--] = NULL;
+	init_letters(&game->wod);
+	init_letters(&game->input);
 }

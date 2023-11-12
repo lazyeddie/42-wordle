@@ -1,28 +1,28 @@
 #include "wordle.h"
 
-int	print_game(t_game *game)
+int	print_game(t_game *game, t_letters *input)
 {
-	char	*input;
-	int		guess = MAX;
-	int		i = 0;
+	int			guess = MAX;
+	int			i = 0;
 
 	while (1)
 	{
-		input = "";
+		input->str = "";
 		print_underscores(guess);
-		while (ft_strlen(input) != 5 || !ft_isalpha(input)) //|| !find_word_in_dict(game, input))
+		while (ft_strlen(input->str) != 5 || !ft_isalpha(input->str)) //|| !find_word_in_dict(game, input))
 		{
-			input = readline("Enter 5 letter word:\t");
-			if (!ft_strlen(input))
+			input->str = readline("Enter 5 letter word:\t");
+			if (!ft_strlen(input->str))
 				free_all(game, NULL, MAX);
 		}
 		guess--;
-		print_prev_guesses(game, game->prev_guesses, input);
-		count_occurrences(&game->prev_guesses[i]);
-		print_guess(game, &game->prev_guesses[i]);
-		if (!strncmp(input, game->wod.str, 5))
+		print_prev_guesses(game, game->prev_guesses, input->str);
+		count_occurrences(input);
+		set_green(&game->wod, input);
+		print_guess(game, input->str);
+		if (!strncmp(input->str, game->wod.str, 5))
 			return (0);
-		free(input);
+		free(input->str);
 		if (!guess)
 			return (1);
 		i++;
@@ -36,37 +36,37 @@ void	print_underscores(int guess)
 		printf(WHITE BOLD"\t\t\t\t\t\t _  _  _  _  _ \n\n"RESET);
 }
 
-void	print_prev_guesses(t_game *game, t_guess *prev_guesses, char *curr_guess)
+void	print_prev_guesses(t_game *game, char *prev_guesses[], char *curr_guess)
 {
 	int			i;
 
 	i = 0;
-	while (prev_guesses && prev_guesses[i].str)
+	while (prev_guesses && prev_guesses[i])
 	{
-		print_guess(game, &prev_guesses[i]);
+		print_guess(game, prev_guesses[i]);
 		i++;
 	}
-	prev_guesses[i].str = strdup(curr_guess);
-	if (!prev_guesses[i].str)
+	prev_guesses[i] = strdup(curr_guess);
+	if (!prev_guesses[i])
 		free_all(game, ERR_MALLOC, i);
 }
 
-void	print_guess(t_game *game, t_guess *guess)
+void	print_guess(t_game *game, char *str)
 {
 	int		i;
 	char	*bg_color;
 
 	i = 0;
 	printf("\t\t\t\t\t\t");
-	while (guess->str && guess->str[i])
+	while (str && str[i])
 	{
 		bg_color = RESET;
-		if (find_hit(game->wod.str, guess->str[i], i))
+		if (find_hit(game->wod.str, str[i], i))
 		//if (guess->color[i] == 1)
 			bg_color = BG_GREEN;
-		else if (find_char(game->wod.str, guess->str[i], i) > 0)
+		else if (find_char(game->wod.str, str[i], i) > 0)
 			bg_color = BG_YELLOW;
-		printf(WHITE BOLD "%s %c "RESET, bg_color, toupper(guess->str[i]));
+		printf(WHITE BOLD "%s %c "RESET, bg_color, toupper(str[i]));
 		i++;
 	}
 	printf("\n");
@@ -78,12 +78,12 @@ void	print_guess(t_game *game, t_guess *guess)
 	i = 0;
 	printf("cur-occur: ");
 	while (i < 5)
-		printf("%d ", guess->occurrences[i++]);
+		printf("%d ", game->input.occurrences[i++]);
 	printf("\n");
 	i = 0;
 	printf("color: ");
 	while (i < 5)
-		printf("%d ", guess->color[i++]);
+		printf("%d ", game->input.color[i++]);
 	printf("\n");
 	// rl_on_new_line();
 	// rl_replace_line("hallihallo", 8);

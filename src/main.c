@@ -31,7 +31,7 @@ int	main(void)
 	read_dictionary(&game, db_file);
 	get_wod(&game);
 	printf("target_word: %s\n", game.wod.str);
-	if (print_game(&game))
+	if (print_game(&game, &game.input))
 		print_fail(game.wod.str);
 	print_success();
 	free_all(&game, NULL, MAX);
